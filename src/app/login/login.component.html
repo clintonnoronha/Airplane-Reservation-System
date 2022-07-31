@@ -1,0 +1,23 @@
+<h2 style="text-align: center;">Mini AirBus! Fly with Joy</h2>
+<form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
+    <div class="controles-container">
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="emailId" placeholder="Email*">
+            <mat-error *ngIf="hasError('emailId', 'required')">This field is mandatory.</mat-error>
+            <mat-error *ngIf="hasError('emailId', 'email')">Invalid Email Address.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" placeholder="Password*">
+            <mat-error *ngIf="hasError('password', 'required')">This field is mandatory.</mat-error>
+            <mat-error *ngIf="hasError('password', 'minlength')">Minimum 8 characters needed.</mat-error>
+        </mat-form-field>
+    
+        <div class="button-row">
+            <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Login</button>
+            <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+    </div>
+</form>

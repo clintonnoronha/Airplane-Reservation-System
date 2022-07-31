@@ -1,0 +1,53 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+/*
+.dropdownMenu {
+    display: none;
+}
+
+@media only screen and (max-width: 600px) {
+    .matToolbar {
+        display: none;
+    }
+
+    .dropdownMenu {
+        display: inline;
+    }
+}
+*/
+
+.loginOverlay {
+    border: solid 1px #ccc;
+    border-radius: 5px;
+    background: #fff;
+    text-align: center;
+    padding: 5px;
+    margin: 0;
+}
+  
+.loginOverlay > li {
+    list-style-type: none;
+}
+
+.signInLink {
+    color: blue;
+    text-decoration: none;
+}
+
+.signInLink:hover {
+    text-decoration: underline;
+}
+
+.signInBtn:disabled {
+    display: none;
+}
+
+.signOutBtn:disabled {
+    display: none;
+}
+
+.myTripsLink:disabled {
+    display: none;
+}

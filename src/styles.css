@@ -1,1 +1,38 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { 
+    height: 100%;
+}
+
+body { 
+    margin: 0;
+    padding: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+
+.mainDiv {
+    background-color: #c8dbea;
+    width: 100%;
+    height: 100%;
+    /* background image settings
+    background: url(assets/images/home.webp);
+    filter: brightness(115%);
+    background-size: cover;
+    background-repeat: no-repeat;*/
+    
+}
+
+.bodyDiv {
+    width: 100%;
+    height: 100%;
+}
+/* You can add global styles to this file, and also import other style files */
+.maincontent {
+    min-height: 600px;
+    height: max-content;
+    background-color: #c8dbea;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background: rgba(200, 219, 234, 0.3);
+    border: none;
+}

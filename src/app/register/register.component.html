@@ -1,0 +1,58 @@
+<h2 style="text-align: center;">Mini AirBus! Fly with Joy</h2>
+<form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
+    <div class="controles-container">
+        <mat-form-field appearance="fill">
+            <mat-select formControlName="title" placeholder="Title">
+                <ng-container *ngFor="let title of titles">
+                    <mat-option value="{{title.id}}">{{title.value}}</mat-option>
+                </ng-container>
+            </mat-select>
+            <mat-error *ngIf="hasError('title', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput formControlName="firstName" placeholder="First Name*">
+            <mat-error *ngIf="hasError('firstName', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput formControlName="lastName" placeholder="First Name*">
+            <mat-error *ngIf="hasError('lastName', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Email</mat-label>
+            <input type="email" matInput formControlName="email" placeholder="Email*">
+            <mat-error *ngIf="hasError('email', 'required')">This field is mandatory.</mat-error>
+            <mat-error *ngIf="hasError('email', 'email')">Invalid Email Address.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Password</mat-label>
+            <input type="password" matInput formControlName="password" placeholder="Password*">
+            <mat-error *ngIf="hasError('password', 'required')">This field is mandatory.</mat-error>
+            <mat-error *ngIf="hasError('password', 'minlength')">Minimum 8 characters needed.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Mobile Number</mat-label>
+            <input type="number" matInput formControlName="phoneNumber" placeholder="Mobile Number*">
+            <mat-error *ngIf="hasError('phoneNumber', 'required')">This field is mandatory.</mat-error>
+            <mat-error *ngIf="hasError('phoneNumber', 'pattern')">Invalid Mobile Number.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input formControlName="dob" matInput [matDatepicker]="picker" placeholder="Date of Birth">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="hasError('dob', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+    
+        <div class="button-row">
+            <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Register</button>
+            <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+    </div>
+</form>

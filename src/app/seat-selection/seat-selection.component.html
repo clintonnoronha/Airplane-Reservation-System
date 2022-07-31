@@ -1,0 +1,190 @@
+<div class="plane">
+    <div class="cockpit">
+      <h1>Seat Selection</h1>
+    </div>
+
+    <form [formGroup]="myForm" (ngSubmit)="confirmAndPay()">
+      <div class="exit exit--front fuselage"></div>
+      <ol class="cabin fuselage">
+        <div style="text-align: center;">
+            <span>Business Class</span>
+        </div><br>
+      <li class="row row--1">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input formControlName="A1" type="checkbox" id="A1" />
+            <label for="A1">1A</label>
+          </li>
+          <li class="seat">
+            <input formControlName="B1" type="checkbox" id="1B" />
+            <label for="1B">1B</label>
+          </li>
+          <li class="seat">
+            <input formControlName="C1" type="checkbox" id="1C" />
+            <label for="1C">1C</label>
+          </li>
+          <li class="seat">
+            <input formControlName="D1" type="checkbox" id="1D" />
+            <label for="1D">1D</label>
+          </li>
+          <li class="seat">
+            <input formControlName="E1" type="checkbox" id="1E" />
+            <label for="1E">1E</label>
+          </li>
+          <li class="seat">
+            <input formControlName="F1" type="checkbox" id="1F" />
+            <label for="1F">1F</label>
+          </li>
+        </ol>
+      </li>
+      <br>
+      <p style="text-align: center;">Economy Class</p>
+      <li class="row row--2">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input formControlName="A2" type="checkbox" id="2A" />
+            <label for="2A">2A</label>
+          </li>
+          <li class="seat">
+            <input formControlName="B2" type="checkbox" id="2B" />
+            <label for="2B">2B</label>
+          </li>
+          <li class="seat">
+            <input formControlName="C2" type="checkbox" id="2C" />
+            <label for="2C">2C</label>
+          </li>
+          <li class="seat">
+            <input formControlName="D2" type="checkbox" id="2D" />
+            <label for="2D">2D</label>
+          </li>
+          <li class="seat">
+            <input formControlName="E2" type="checkbox" id="2E" />
+            <label for="2E">2E</label>
+          </li>
+          <li class="seat">
+            <input formControlName="F2" type="checkbox" id="2F" />
+            <label for="2F">2F</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--3">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input formControlName="A3" type="checkbox" id="3A" />
+            <label for="3A">3A</label>
+          </li>
+          <li class="seat">
+            <input formControlName="B3" type="checkbox" id="3B" />
+            <label for="3B">3B</label>
+          </li>
+          <li class="seat">
+            <input formControlName="C3" type="checkbox" id="3C" />
+            <label for="3C">3C</label>
+          </li>
+          <li class="seat">
+            <input formControlName="D3" type="checkbox" id="3D" />
+            <label for="3D">3D</label>
+          </li>
+          <li class="seat">
+            <input formControlName="E3" type="checkbox" id="3E" />
+            <label for="3E">3E</label>
+          </li>
+          <li class="seat">
+            <input formControlName="F3" type="checkbox" id="3F" />
+            <label for="3F">3F</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--4">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input formControlName="A4" type="checkbox" id="4A" />
+            <label for="4A">4A</label>
+          </li>
+          <li class="seat">
+            <input formControlName="B4" type="checkbox" id="4B" />
+            <label for="4B">4B</label>
+          </li>
+          <li class="seat">
+            <input formControlName="C4" type="checkbox" id="4C" />
+            <label for="4C">4C</label>
+          </li>
+          <li class="seat">
+            <input formControlName="D4" type="checkbox" id="4D" />
+            <label for="4D">4D</label>
+          </li>
+          <li class="seat">
+            <input formControlName="E4" type="checkbox" id="4E" />
+            <label for="4E">4E</label>
+          </li>
+          <li class="seat">
+            <input formControlName="F4" type="checkbox" id="4F" />
+            <label for="4F">4F</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--5">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input formControlName="A5" type="checkbox" id="5A" />
+            <label for="5A">5A</label>
+          </li>
+          <li class="seat">
+            <input formControlName="B5" type="checkbox" id="5B" />
+            <label for="5B">5B</label>
+          </li>
+          <li class="seat">
+            <input formControlName="C5" type="checkbox" id="5C" />
+            <label for="5C">5C</label>
+          </li>
+          <li class="seat">
+            <input formControlName="D5" type="checkbox" id="5D" />
+            <label for="5D">5D</label>
+          </li>
+          <li class="seat">
+            <input formControlName="E5" type="checkbox" id="5E" />
+            <label for="5E">5E</label>
+          </li>
+          <li class="seat">
+            <input formControlName="F5"  type="checkbox" id="5F" />
+            <label for="5F">5F</label>
+          </li>
+        </ol>
+      </li>
+      <li class="row row--6">
+        <ol class="seats" type="A">
+          <li class="seat">
+            <input formControlName="A6" type="checkbox" id="6A" />
+            <label for="6A">6A</label>
+          </li>
+          <li class="seat">
+            <input formControlName="B6" type="checkbox" id="6B" />
+            <label for="6B">6B</label>
+          </li>
+          <li class="seat">
+            <input formControlName="C6" type="checkbox" id="6C" />
+            <label for="6C">6C</label>
+          </li>
+          <li class="seat">
+            <input formControlName="D6" type="checkbox" id="6D" />
+            <label for="6D">6D</label>
+          </li>
+          <li class="seat">
+            <input formControlName="E6" type="checkbox" id="6E" />
+            <label for="6E">6E</label>
+          </li>
+          <li class="seat">
+            <input formControlName="F6" type="checkbox" id="6F" />
+            <label for="6F">6F</label>
+          </li>
+        </ol>
+      </li> 
+    </ol>
+
+    <div class="exit exit--back fuselage"></div>
+    <br>
+    <div align="center">
+      <button mat-raised-button color="confirm_seat" type="submit">Confirm and Pay</button>
+    </div>
+  </form>
+</div>

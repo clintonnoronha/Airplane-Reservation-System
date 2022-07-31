@@ -1,0 +1,66 @@
+<mat-toolbar color="primary" class="mat-elevation-z6">
+    <a style="color: white; text-decoration: none;" href="http://localhost:4200" ><span><mat-icon>flight</mat-icon>Mini AirBus</span></a>
+    <span class="spacer"></span>
+    <!--<span class="dropdownMenu">
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu" yPosition="below">
+            <button mat-menu-item (click)="loginDialog()">
+                <mat-icon>login</mat-icon>
+                <span>Login</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>manage_search</mat-icon>
+                <span>Search Flights</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>calendar_today</mat-icon>
+                <span>View Flights</span>
+            </button>
+            <button mat-menu-item>
+                <mat-icon>info</mat-icon>
+                <span>About us</span>
+            </button>
+        </mat-menu>
+    </span> -->
+    <span class="matToolbar">
+        <ng-container *ngIf="isLoggedIn && !isAdmin">
+            <a class="myTripsLink" mat-button routerLink="trip">My Trips</a>
+        </ng-container>
+        <ng-container *ngIf="!isAdmin">
+            <a mat-button routerLink="search">Search Flights</a>
+            <a mat-button routerLink="about">About Us</a>
+        </ng-container>
+        <ng-container *ngIf="isAdmin">
+            <a mat-button routerLink="">View Flights</a>
+            <a mat-button routerLink="">Add Flight</a>
+        </ng-container>
+        
+        <button class="signInBtn" [disabled]="isLoggedIn" mat-raised-button color="accent" cdkOverlayOrigin #trigger="cdkOverlayOrigin"
+        (mouseenter)="buttonEnter()" (mouseleave)="buttonLeave()" (click)="loginDialog()"
+        style="z-index:1050">
+            <mat-icon>login</mat-icon>
+            <span style="margin-left: 4px;">Login</span>
+        </button>
+        
+        <ng-template
+        cdkConnectedOverlay
+        [cdkConnectedOverlayOrigin]="trigger"
+        [cdkConnectedOverlayOpen]="isOpen">
+            <ul class="loginOverlay"  (mouseenter)="menuEnter()" (mouseleave)="menuLeave()">
+                <li>
+                    <span>
+                        <pre> <b style="font-family: 'Courier New', Courier, monospace;">New Customer?</b>    <span><a class="signInLink" [routerLink]="" (click)="registerDialog()">Sign Up</a></span> </pre>
+                    </span>
+                </li>
+            </ul>
+        </ng-template>
+
+        <button class="signOutBtn" mat-raised-button color="accent" (click)="logOut()"
+        style="z-index:1050" [disabled]="!isLoggedIn">
+            <mat-icon>logout</mat-icon>
+            <span style="margin-left: 4px;">Sign Out</span>
+        </button>
+    </span>
+</mat-toolbar>
