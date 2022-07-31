@@ -15,6 +15,7 @@ import { AboutComponent } from './about/about.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MyTripsComponent } from './my-trips/my-trips.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { MyTripsComponent } from './my-trips/my-trips.component';
     LoginComponent,
     RegisterComponent,
     MyTripsComponent,
+    ForgotPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -19,5 +19,9 @@
             <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Login</button>
             <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
         </div>
+
+        <div>
+            <a routerLink="" (click)="openForgotPasswordDialog()">Forgot Password?</a>
+        </div>
     </div>
 </form>
