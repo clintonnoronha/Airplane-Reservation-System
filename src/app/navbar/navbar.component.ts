@@ -1,5 +1,6 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { OnInit, Component } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { LocalService } from '../local.service';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
 
@@ -8,7 +9,7 @@ import { RegisterComponent } from '../register/register.component';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements AfterViewInit {
+export class NavbarComponent implements OnInit {
 
   isLoggedIn = false;
   isAdmin = false;
@@ -16,10 +17,23 @@ export class NavbarComponent implements AfterViewInit {
   buttonHover = false;
   overlayHover = false;
 
-  constructor(private dialog: MatDialog) { }
+  constructor(private dialog: MatDialog, private localStore: LocalService) {
 
-  ngAfterViewInit(): void {
-    
+   }
+
+  ngOnInit(): void {
+      if(this.localStore.getData('user_id')===null){
+          this.isLoggedIn=false;
+          this.isAdmin=false;
+      }
+      else if(this.localStore.getData('user_id')!=null && parseInt(this.localStore.getData('role'))===0) {
+          this.isLoggedIn= true;
+          this.isAdmin= false;
+      }
+      else if(this.localStore.getData('user_id')!=null && parseInt(this.localStore.getData('role'))===1) {
+        this.isLoggedIn= true;
+        this.isAdmin= true;
+      }
   }
 
   menuEnter() {
@@ -70,7 +84,10 @@ export class NavbarComponent implements AfterViewInit {
   }
 
   logOut() {
-    
+    this.localStore.clearData();
+    this.isLoggedIn=false;
+    this.isAdmin= false;
+    // window.location.reload();   
   }
 
 }

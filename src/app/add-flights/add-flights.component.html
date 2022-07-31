@@ -1,0 +1,68 @@
+<h2 style="text-align: center;">Add Flight</h2>
+<form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
+    <div class="controles-container">
+        
+
+        <mat-form-field appearance="fill">
+            <mat-label>Flight ID</mat-label>
+            <input type="text" matInput formControlName="flightId" placeholder="Flight ID*">
+            <mat-error *ngIf="hasError('flightId', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Aircraft ID</mat-label>
+            <input type="text" matInput formControlName="aircraftId" placeholder="Aircraft ID*">
+            <mat-error *ngIf="hasError('aircraftId', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-select formControlName="source" placeholder="Source">
+                <ng-container *ngFor="let city of cities">
+                    <mat-option value="{{city.city}}">{{city.city}}</mat-option>
+                </ng-container>
+            </mat-select>
+            <mat-error *ngIf="hasError('source', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-select formControlName="destination" placeholder="Destination">
+                <ng-container *ngFor="let city of cities">
+                    <mat-option value="{{city.city}}">{{city.city}}</mat-option>
+                </ng-container>
+            </mat-select>
+            <mat-error *ngIf="hasError('destination', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Departure Time</mat-label>
+            <input type="text" matInput formControlName="departureTime" placeholder="Departure Time*">
+            <mat-error *ngIf="hasError('departureTime', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-label>Arrival Time</mat-label>
+            <input type="text" matInput formControlName="arrivalTime" placeholder="Arrival Time*">
+            <mat-error *ngIf="hasError('arrivalTime', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input formControlName="departureDate" matInput [matDatepicker]="picker" placeholder="Departure Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="hasError('departureDate', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="fill">
+            <mat-label>Flight Duration</mat-label>
+            <input type="text" matInput formControlName="duration" placeholder="Flight Duration*">
+            <mat-error *ngIf="hasError('duration', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <div class="button-row">
+            <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Add Flight</button>
+            <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
+        </div>
+    </div>
+</form>

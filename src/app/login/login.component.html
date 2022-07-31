@@ -23,5 +23,12 @@
         <div>
             <a routerLink="" (click)="openForgotPasswordDialog()">Forgot Password?</a>
         </div>
+
+        <div *ngIf="loginFailed">
+            <p>{{message}}</p>
+            
+        </div>
+        
+
     </div>
 </form>

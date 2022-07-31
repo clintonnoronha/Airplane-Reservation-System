@@ -1,0 +1,16 @@
+<h2 style="text-align: center;">Delete Flight</h2>
+<form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
+    <div class="controles-container">
+        
+
+        <mat-form-field appearance="fill">
+            <mat-label>Flight ID</mat-label>
+            <input type="text" matInput formControlName="flightId" placeholder="Flight ID*">
+            <mat-error *ngIf="hasError('flightId', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <div class="button-row">
+            <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Delete Flight</button>
+        </div>
+    </div>
+</form>

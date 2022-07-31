@@ -54,5 +54,9 @@
             <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Register</button>
             <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
         </div>
+
+        <div *ngIf="registered">
+            <p>{{message}}</p>
+        </div>
     </div>
 </form>

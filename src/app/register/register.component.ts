@@ -25,14 +25,42 @@ export class RegisterComponent implements OnInit {
     { id: 3, value: 'Mrs.'}
   ]
 
+  message: string='';
+  registered=false;
+
   constructor(private service: RegisterService) { }
 
   ngOnInit(): void {
   }
 
-  onSubmit() {
+  onRegister(){
+    let date = new Date(this.form.value.dob);
 
+    console.log(date.toLocaleDateString());
+    let title= this.titles.filter( t=> t.id== this.form.value.title);
+    console.log(title,"     ", this.form.value.title);
+    let toRegister ={
+       fname: this.form.value.firstName,
+       lname: this.form.value.lastName,
+       email: this.form.value.email,
+       pswd: this.form.value.password,
+       dob: date.toLocaleDateString(),
+       phone_number: this.form.value.phoneNumber,
+       title: title[0].value
+    }
+    this.service.register(toRegister).subscribe((response)=> {
+        return 1;
+    });
+    return 0;
   }
+
+  onSubmit() {
+      if(this.onRegister()===1) {
+        this.message= 'User registered Successfully! Please Sign In.';
+        this.registered= true;
+      }
+  }
+  
 
   onClear() {
     this.form.reset();

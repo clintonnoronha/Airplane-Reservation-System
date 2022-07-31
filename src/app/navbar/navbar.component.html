@@ -33,8 +33,8 @@
             <a mat-button routerLink="about">About Us</a>
         </ng-container>
         <ng-container *ngIf="isAdmin">
-            <a mat-button routerLink="">View Flights</a>
-            <a mat-button routerLink="">Add Flight</a>
+            <a mat-button routerLink="/add-flight">Add Flight</a>
+            <a mat-button routerLink="/delete-flight">Delete Flight</a>
         </ng-container>
         
         <button class="signInBtn" [disabled]="isLoggedIn" mat-raised-button color="accent" cdkOverlayOrigin #trigger="cdkOverlayOrigin"

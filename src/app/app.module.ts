@@ -16,6 +16,9 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MyTripsComponent } from './my-trips/my-trips.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ViewFlightsComponent } from './view-flights/view-flights.component';
+import { AddFlightsComponent } from './add-flights/add-flights.component';
+import { DeleteFlightsComponent } from './delete-flights/delete-flights.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,9 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     RegisterComponent,
     MyTripsComponent,
     ForgotPasswordComponent,
+    ViewFlightsComponent,
+    AddFlightsComponent,
+    DeleteFlightsComponent,
   ],
   imports: [
     BrowserModule,
