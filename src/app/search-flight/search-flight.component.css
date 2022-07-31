@@ -1,0 +1,26 @@
+.add-bottom-padding
+{ padding-bottom: 10px; }
+ /* radio group */
+  mat-radio-group mat-radio-button
+ { margin-left: 5px; }
+
+ .controles-container{
+    width: 90%;
+    padding: 5%;    
+}
+
+.controles-container > * {
+    width: 90%;
+}
+
+.button-row button {
+    margin: 5px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+form.normal-form{
+    margin: 10px;
+}

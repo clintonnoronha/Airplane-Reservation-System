@@ -5,13 +5,15 @@ import { AddFlightsComponent } from './add-flights/add-flights.component';
 import { DeleteFlightsComponent } from './delete-flights/delete-flights.component';
 import { MyTripsComponent } from './my-trips/my-trips.component';
 import { SearchFlightComponent } from './search-flight/search-flight.component';
+import { ViewFlightsComponent } from './view-flights/view-flights.component';
 
 const routes: Routes = [
   { path: 'trip', component: MyTripsComponent },
   { path: 'search', component: SearchFlightComponent },
   { path: 'about', component: AboutComponent },
   { path: 'add-flight', component: AddFlightsComponent },
-  { path: 'delete-flight', component: DeleteFlightsComponent }
+  { path: 'delete-flight', component: DeleteFlightsComponent },
+  { path: 'view-flights', component: ViewFlightsComponent }
 ];
 
 @NgModule({

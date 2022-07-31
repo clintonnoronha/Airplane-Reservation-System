@@ -1,1 +1,57 @@
-<p>search-flight works!</p>
+<h2 style="text-align: center;">Search Flights</h2>
+<form [formGroup]="form" class="normal-form" (submit)="onSubmit()">
+    <div class="controles-container">
+        
+        <div class="add-bottom-padding"> 
+            <mat-radio-group formControlName="journeyType"> 
+                <mat-radio-button value="1">One-Way</mat-radio-button>
+                <mat-radio-button value="2">Return</mat-radio-button> 
+                <mat-error *ngIf="hasError('journeyType', 'required')">This field is mandatory.</mat-error>
+            </mat-radio-group>
+        </div>
+
+        <mat-form-field appearance="fill">
+            <mat-select formControlName="source" placeholder="Source">
+                <ng-container *ngFor="let city of cities">
+                    <mat-option value="{{city.city}}">{{city.city}}</mat-option>
+                </ng-container>
+            </mat-select>
+            <mat-error *ngIf="hasError('source', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-select formControlName="destination" placeholder="Destination">
+                <ng-container *ngFor="let city of cities">
+                    <mat-option value="{{city.city}}">{{city.city}}</mat-option>
+                </ng-container>
+            </mat-select>
+            <mat-error *ngIf="hasError('destination', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+            <input formControlName="departureDate" matInput [matDatepicker]="picker" placeholder="Departure Date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="hasError('departureDate', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field >
+            <input formControlName="returnDate" matInput [matDatepicker]="returnPicker" placeholder="Return Date">
+            <mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
+            <mat-datepicker #returnPicker></mat-datepicker>
+            <mat-error *ngIf="hasError('returnDate', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+            <mat-select formControlName="classType" placeholder="Class">
+                <mat-option value="Economy">Economy</mat-option>
+                <mat-option value="Business">Business</mat-option>
+            </mat-select>
+            <mat-error *ngIf="hasError('classType', 'required')">This field is mandatory.</mat-error>
+        </mat-form-field>
+
+        <div class="button-row">
+            <button type="submit" mat-raised-button color="primary" [disabled]="form.invalid">Search Flights</button>
+        </div>
+    </div>
+</form>
