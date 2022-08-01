@@ -13,11 +13,14 @@ export class SearchFlightService {
 
   searchFlightOneWay(data: any): Observable<any> {
     return this.http.get(`${this.url + '?departure_date=' + data.departure_date + 
-    '&source=' + data.source + '&destination=' + data.destination}`, data);
+    '&source=' + data.source + '&destination=' + data.destination + 
+    '&seat_type=' + data.seat_type}`, data);
   }
 
   searchFlightReturn(data: any): Observable<any> {
     return this.http.get(`${this.url + '?departure_date=' + data.departure_date + 
-    '&source=' + data.source + '&destination=' + data.destination}`, data);
+    '&source=' + data.source + '&destination=' + data.destination + 
+    '&seat_type=' + data.seat_type}`, data);
   }
+
 }

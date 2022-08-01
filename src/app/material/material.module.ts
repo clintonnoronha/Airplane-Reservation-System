@@ -15,6 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
+import {MatChipsModule} from '@angular/material/chips';
 
 const MaterialComponents = [
   MatListModule,
@@ -32,7 +33,8 @@ const MaterialComponents = [
   MatSelectModule,
   MatRadioModule,
   MatGridListModule,
-  MatCardModule
+  MatCardModule,
+  MatChipsModule
 ];
 
 @NgModule({

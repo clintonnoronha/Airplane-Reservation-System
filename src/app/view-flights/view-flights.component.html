@@ -9,6 +9,9 @@
                     <p>Departure Time: {{ flight.departure_time }}</p>
                     <p>Arrival Time: {{ flight.arrival_time }}</p>
                     <p>Departure Date: {{ flight.departure_date }}</p>
+                    <mat-chip-list>
+                        <mat-chip color="warn" selected>{{ flight.count_of_seats }} Seats</mat-chip>
+                    </mat-chip-list>
                 </mat-card-content>
                 <mat-card-actions>
                     <button mat-raised-button color="primary" (click)="bookFlight()">BOOK</button>
@@ -28,6 +31,9 @@
                     <p>Departure Time: {{ flight.departure_time }}</p>
                     <p>Arrival Time: {{ flight.arrival_time }}</p>
                     <p>Departure Date: {{ flight.departure_date }}</p>
+                    <mat-chip-list>
+                        <mat-chip color="warn" selected>{{ flight.count_of_seats }} Seats</mat-chip>
+                    </mat-chip-list>
                 </mat-card-content>
                 <mat-card-actions>
                     <button mat-raised-button color="primary" (click)="bookFlight()">BOOK</button>

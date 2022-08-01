@@ -12,6 +12,7 @@ export class ViewFlightsComponent implements OnInit {
   return = false;
   oneWayList = [];
   returnList = [];
+  tripDetailsList = [];
 
   constructor(private searchFlightService: SearchFlightService,
     private localStore: LocalService) { }
@@ -24,11 +25,12 @@ export class ViewFlightsComponent implements OnInit {
     let toSearchFlight = {
       departure_date: this.localStore.getData('departureDate'),
       source: this.localStore.getData('source'),
-      destination: this.localStore.getData('destination')
+      destination: this.localStore.getData('destination'),
+      seat_type: this.localStore.getData('classType')
     }
     this.oneWayList = [];
     this.searchFlightService.searchFlightOneWay(toSearchFlight).subscribe(response => {
-      this.oneWayList = response;
+      this.oneWayList=response;
     });
   }
 
@@ -36,11 +38,12 @@ export class ViewFlightsComponent implements OnInit {
     let toSearchFlight = {
       departure_date: this.localStore.getData('returnDate'),
       source: this.localStore.getData('destination'),
-      destination: this.localStore.getData('source')
+      destination: this.localStore.getData('source'),
+      seat_type: this.localStore.getData('classType')
     }
     this.returnList = [];
     this.searchFlightService.searchFlightReturn(toSearchFlight).subscribe(response => {
-        this.returnList = response;
+      this.returnList=response;
     });
   }
 

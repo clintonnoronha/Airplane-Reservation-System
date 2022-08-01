@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { RegisterService } from '../shared/register.service';
 
 @Component({
@@ -9,6 +10,7 @@ import { RegisterService } from '../shared/register.service';
 })
 export class RegisterComponent implements OnInit {
 
+  maxDate=new Date();
   form = new FormGroup({
     firstName: new FormControl('', Validators.required),
     lastName: new FormControl('', Validators.required),
@@ -27,8 +29,8 @@ export class RegisterComponent implements OnInit {
 
   message: string='';
   registered=false;
-
-  constructor(private service: RegisterService) { }
+  constructor(private service: RegisterService,
+    private registerDialogue: MatDialogRef<RegisterComponent>) { }
 
   ngOnInit(): void {
   }
@@ -49,18 +51,19 @@ export class RegisterComponent implements OnInit {
        title: title[0].value
     }
     this.service.register(toRegister).subscribe((response)=> {
-        return 1;
+        this.onClear();
     });
-    return 0;
+    this.registered=true;
   }
 
   onSubmit() {
-      if(this.onRegister()===1) {
+    this.onRegister();
+      if (this.registered) {
         this.message= 'User registered Successfully! Please Sign In.';
-        this.registered= true;
+        alert(this.message);
       }
+      this.registered=false;
   }
-  
 
   onClear() {
     this.form.reset();

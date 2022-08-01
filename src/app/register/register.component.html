@@ -44,7 +44,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input formControlName="dob" matInput [matDatepicker]="picker" placeholder="Date of Birth">
+            <input [max]="maxDate" formControlName="dob" matInput [matDatepicker]="picker" placeholder="Date of Birth">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="hasError('dob', 'required')">This field is mandatory.</mat-error>
@@ -55,8 +55,6 @@
             <button mat-raised-button color="warn" (click)="onClear()">Clear</button>
         </div>
 
-        <div *ngIf="registered">
-            <p>{{message}}</p>
-        </div>
+       
     </div>
 </form>
