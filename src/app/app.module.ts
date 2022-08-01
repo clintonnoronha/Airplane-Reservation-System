@@ -19,6 +19,7 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ViewFlightsComponent } from './view-flights/view-flights.component';
 import { AddFlightsComponent } from './add-flights/add-flights.component';
 import { DeleteFlightsComponent } from './delete-flights/delete-flights.component';
+import { AddPassengerComponent } from './add-passenger/add-passenger.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { DeleteFlightsComponent } from './delete-flights/delete-flights.componen
     ForgotPasswordComponent,
     ViewFlightsComponent,
     AddFlightsComponent,
-    DeleteFlightsComponent
+    DeleteFlightsComponent,
+    AddPassengerComponent
   ],
   imports: [
     BrowserModule,
