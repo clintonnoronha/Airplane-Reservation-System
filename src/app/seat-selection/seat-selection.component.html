@@ -1,4 +1,5 @@
-<div class="plane">
+<ng-container *ngIf="isLoaded">
+  <div class="plane">
     <div class="cockpit">
       <h1>Seat Selection</h1>
     </div>
@@ -183,8 +184,10 @@
 
     <div class="exit exit--back fuselage"></div>
     <br>
-    <div align="center">
-      <button mat-raised-button color="confirm_seat" type="submit">Confirm and Pay</button>
+    <div class="button-row" align="center">
+      <button mat-raised-button color="primary" type="submit">Confirm and Pay</button>
+      <a mat-raised-button color="accent" routerLink="/seat-selection" (click)="addPassengers()">Add Passengers</a>
     </div>
   </form>
 </div>
+</ng-container>

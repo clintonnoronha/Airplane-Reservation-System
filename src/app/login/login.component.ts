@@ -25,7 +25,8 @@ export class LoginComponent implements OnInit {
   constructor(private dialog: MatDialog,
     private loginDialog: MatDialogRef<LoginComponent>, 
     private loginService: LoginService,
-    private localStore: LocalService) { }
+    private localStore: LocalService,
+    private router: Router) { }
 
   ngOnInit(): void {
     
@@ -48,7 +49,6 @@ export class LoginComponent implements OnInit {
           this.loginDialog.close();
           window.location.reload();
 
-           
       }
       else {
         this.check=0;

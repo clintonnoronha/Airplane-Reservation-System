@@ -33,7 +33,7 @@ import { DeleteFlightsComponent } from './delete-flights/delete-flights.componen
     ForgotPasswordComponent,
     ViewFlightsComponent,
     AddFlightsComponent,
-    DeleteFlightsComponent,
+    DeleteFlightsComponent
   ],
   imports: [
     BrowserModule,

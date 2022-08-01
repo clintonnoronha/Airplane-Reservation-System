@@ -1,7 +1,7 @@
 <div>
     <h2 style="text-align: center;">One Way Flights</h2>
-    <mat-grid-list cols="2" rowHeight="350px">
-        <mat-grid-tile *ngFor="let flight of oneWayList"> 
+    <mat-grid-list cols="3" rowHeight="350px">
+        <mat-grid-tile *ngFor="let flight of oneWayList;"> 
             <mat-card class="example-card">
                 <mat-card-title>{{ flight.source }} - {{ flight.destination }}</mat-card-title>
                 <mat-card-subtitle>Flight Duration: {{ flight.duration }}</mat-card-subtitle>
@@ -9,12 +9,14 @@
                     <p>Departure Time: {{ flight.departure_time }}</p>
                     <p>Arrival Time: {{ flight.arrival_time }}</p>
                     <p>Departure Date: {{ flight.departure_date }}</p>
+                    <p></p>
                     <mat-chip-list>
+                        <mat-chip color="accent" selected>&#8377;{{ flight.price }}/-</mat-chip>
                         <mat-chip color="warn" selected>{{ flight.count_of_seats }} Seats</mat-chip>
                     </mat-chip-list>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-raised-button color="primary" (click)="bookFlight()">BOOK</button>
+                    <button mat-raised-button color="primary" (click)="bookFlight(flight.flight_id, flight.price)">BOOK</button>
                 </mat-card-actions>
             </mat-card>
         </mat-grid-tile>
@@ -22,7 +24,7 @@
 </div>
 <div *ngIf="return">
     <h2 style="text-align: center;">Return Flights</h2>
-    <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-list cols="3" rowHeight="350px">
         <mat-grid-tile *ngFor="let flight of returnList"> 
             <mat-card class="example-card">
                 <mat-card-title>{{ flight.source }} - {{ flight.destination }}</mat-card-title>
@@ -32,11 +34,12 @@
                     <p>Arrival Time: {{ flight.arrival_time }}</p>
                     <p>Departure Date: {{ flight.departure_date }}</p>
                     <mat-chip-list>
+                        <mat-chip color="accent" selected>&#8377;{{ flight.price }}/-</mat-chip>
                         <mat-chip color="warn" selected>{{ flight.count_of_seats }} Seats</mat-chip>
                     </mat-chip-list>
                 </mat-card-content>
                 <mat-card-actions>
-                    <button mat-raised-button color="primary" (click)="bookFlight()">BOOK</button>
+                    <button mat-raised-button color="primary" (click)="bookFlight(flight.flight_id, flight.price)">BOOK</button>
                 </mat-card-actions>
             </mat-card>
         </mat-grid-tile>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { LocalService } from '../local.service';
 import { PaymentService } from '../payment.service';
+import { SeatsBookedService } from '../shared/seats-booked.service';
 
 @Component({
   selector: 'app-seat-selection',
@@ -13,7 +15,14 @@ export class SeatSelectionComponent implements OnInit {
 
   handler: any = null;
 
-  constructor(private payService: PaymentService, private fb: FormBuilder) {}
+  bookedSeats = [];
+
+  isLoaded = false;
+
+  constructor(private payService: PaymentService, 
+    private fb: FormBuilder,
+    private seatsBookedService: SeatsBookedService,
+    private localStore: LocalService) {}
 
   ngOnInit() {
     this.myForm = this.fb.group({
@@ -54,25 +63,72 @@ export class SeatSelectionComponent implements OnInit {
       E6: {value: false, disabled: false},
       F6: {value: false, disabled: false}
     });
-    this.disableBookedSeats();
+    this.fetchSeatsBooked();
     this.invokeStripe();
     this.payService.list();
-  }
-
-  bookedSeats = ['B1', 'F1', 'C3', 'F4', 'E5', 'A6'];
-
-  disableBookedSeats() {
-    Object.keys(this.myForm.controls).forEach(key => {
-      if (this.bookedSeats.includes(key)) {
-        this.myForm.get(key).disable();
+    let it = this
+    setTimeout(function() {
+      console.log(it.bookedSeats, 'test');
+      Object.keys(it.myForm.controls).forEach(key => {
+        console.log(key);
+      if (it.bookedSeats.includes(key)) {
+        it.myForm.get(key).disable();
+        console.log(it.myForm.get(key))
       }
     });
+      it.isLoaded = true;
+    }, 5000);
+  }
+
+  disableBookedSeats() {
+    
+  }
+
+  fetchSeatsBooked() {
+    let toFetchBookedSeats = {
+      trip_id: this.localStore.getData('selected_trip_id')
+    };
+
+    if (this.localStore.getData('classType') === 'Economy') {
+      this.seatsBookedService.fetchBusinessBooked().subscribe(response => {
+        this.bookedSeats = response;
+        console.log(this.bookedSeats + " " + response);
+      });
+
+      this.seatsBookedService.fetchSeatsBooked(toFetchBookedSeats).subscribe(response => {
+        response.forEach(e => {
+          if (!this.bookedSeats.includes(e)) {
+            this.bookedSeats.push(e);
+          }
+        });
+        console.log(this.bookedSeats + " " + response);
+      });
+    } else if (this.localStore.getData('classType') === 'Business') {
+      this.seatsBookedService.fetchEconomySeats().subscribe(response => {
+        this.bookedSeats = response;
+        console.log(this.bookedSeats + " " + response);
+      });
+
+      this.seatsBookedService.fetchSeatsBooked(toFetchBookedSeats).subscribe(response => {
+        response.forEach(e => {
+          if (!this.bookedSeats.includes(e)) {
+            this.bookedSeats.push(e);
+          }
+        });
+        console.log(this.bookedSeats + " " + response);
+      });
+    }
+  }
+
+  addPassengers() {
+
   }
 
   confirmAndPay() {
+    //if ()
     let selectedSeats = []
     let count = 0;
-    let seat_cost = 4000;
+    let seat_cost = parseInt(this.localStore.getData('price'));
     Object.keys(this.myForm.value).forEach(key => {
       if (this.myForm.get(key).value == true) {
         selectedSeats.push(key);
@@ -119,5 +175,4 @@ export class SeatSelectionComponent implements OnInit {
       window.document.body.appendChild(script);
     }
   }
-
 }

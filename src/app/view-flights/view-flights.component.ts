@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LocalService } from '../local.service';
 import { SearchFlightService } from '../shared/search-flight.service';
 
@@ -15,7 +16,8 @@ export class ViewFlightsComponent implements OnInit {
   tripDetailsList = [];
 
   constructor(private searchFlightService: SearchFlightService,
-    private localStore: LocalService) { }
+    private localStore: LocalService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.loadFlights();
@@ -58,8 +60,11 @@ export class ViewFlightsComponent implements OnInit {
     }
   }
 
-  bookFlight(){
-
+  bookFlight(trip_id: any, price: any){
+    this.localStore.saveData('selected_trip_id', trip_id);
+    this.localStore.saveData('price', price);
+    console.log(this.localStore.getData('selected_trip_id') + ", " + this.localStore.getData('price'));
+    this.router.navigateByUrl("/seat-selection");
   }
 
 }

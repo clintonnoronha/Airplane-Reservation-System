@@ -1,5 +1,7 @@
 import { OnInit, Component } from '@angular/core';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { finalize } from 'rxjs';
 import { LocalService } from '../local.service';
 import { LoginComponent } from '../login/login.component';
 import { RegisterComponent } from '../register/register.component';
@@ -17,7 +19,11 @@ export class NavbarComponent implements OnInit {
   buttonHover = false;
   overlayHover = false;
 
-  constructor(private dialog: MatDialog, private localStore: LocalService) {
+  constructor(private dialog: MatDialog, 
+    private localStore: LocalService, 
+    private router: Router,
+    private lgnDialog: MatDialogRef<LoginComponent>,
+    private rgstDialog: MatDialogRef<RegisterComponent>) {
 
    }
 
@@ -33,6 +39,7 @@ export class NavbarComponent implements OnInit {
       else if(this.localStore.getData('user_id')!=null && parseInt(this.localStore.getData('role'))===1) {
         this.isLoggedIn= true;
         this.isAdmin= true;
+        this.router.navigateByUrl("/add-flight");
       }
   }
 
@@ -70,24 +77,42 @@ export class NavbarComponent implements OnInit {
   }
 
   loginDialog() {
+    if(!this.lgnDialog) {
+      return;
+    }
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(LoginComponent, dialogConfig);
+    
+    this.lgnDialog = this.dialog.open(LoginComponent, dialogConfig);
+
+    this.lgnDialog.afterClosed().pipe(
+      finalize(() => this.lgnDialog = undefined)
+    );
   }
 
   registerDialog() {
+    if(!this.rgstDialog) {
+      return;
+    }
+
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.width = "60%";
-    this.dialog.open(RegisterComponent, dialogConfig);
+
+    this.rgstDialog = this.dialog.open(RegisterComponent, dialogConfig);
+
+    this.rgstDialog.afterClosed().pipe(
+      finalize(() => this.rgstDialog = undefined)
+    );
   }
 
   logOut() {
     this.localStore.clearData();
     this.isLoggedIn=false;
     this.isAdmin= false;
-    // window.location.reload();   
+    this.router.navigateByUrl('/search');  
   }
 
 }
