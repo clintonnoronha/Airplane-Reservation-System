@@ -1,1 +1,18 @@
-<p>my-trips works!</p>
+<div>
+    <h2 style="text-align: center;">My Trips</h2>
+    <mat-grid-list cols="3" rowHeight="350px">
+        <mat-grid-tile *ngFor="let trip of tripList;"> 
+            <mat-card class="example-card">
+                <mat-card-title>Booking ID: {{trip.bookingId}}</mat-card-title>
+                <mat-card-subtitle>Payment ID: {{ trip.paymentId }}</mat-card-subtitle>
+                <mat-card-content>
+                    <p>Booking Date: {{ trip.bookingDate }}</p>
+                    <mat-chip-list>
+                        <mat-chip color="primary" selected>&#8377;{{ trip.amount }}/-</mat-chip>
+                        <mat-chip color="accent" selected>{{ trip.status }} </mat-chip>
+                    </mat-chip-list>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>

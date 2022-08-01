@@ -88,7 +88,7 @@ export class AddPassengerComponent implements OnInit {
       tripId: this.localStore.getData('selected_trip_id'),
       bookingDate: new Date().toLocaleDateString(),
       status: 'Paid',
-      amount: count * (seat_cost * 100),
+      amount: count * (seat_cost),
     };
 
     let it = this;
