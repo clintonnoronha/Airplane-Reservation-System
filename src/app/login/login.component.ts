@@ -25,8 +25,7 @@ export class LoginComponent implements OnInit {
   constructor(private dialog: MatDialog,
     private loginDialog: MatDialogRef<LoginComponent>, 
     private loginService: LoginService,
-    private localStore: LocalService,
-    private router: Router) { }
+    private localStore: LocalService) { }
 
   ngOnInit(): void {
     

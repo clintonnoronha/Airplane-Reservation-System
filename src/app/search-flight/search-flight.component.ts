@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatRadioChange } from '@angular/material/radio';
 import { Router } from '@angular/router';
 import { LocalService } from '../local.service';
 
@@ -23,12 +24,15 @@ export class SearchFlightComponent implements OnInit {
     {city: 'Udaipur'},
   ];
 
+  minDate = new Date();
+  isOneWay = true;
+
   form= new FormGroup({
     journeyType: new FormControl(0, Validators.required),
     source: new FormControl('', Validators.required),
     destination: new FormControl('', Validators.required),
     departureDate: new FormControl('', Validators.required),
-    returnDate: new FormControl('', Validators.required),
+    returnDate: new FormControl(''),
     classType: new FormControl('' , Validators.required)
   });
 
@@ -64,6 +68,14 @@ export class SearchFlightComponent implements OnInit {
     return this.form.controls[controlName].hasError(errorName);
   }
 
-  
+
+  disableReturn(event: MatRadioChange) {
+    console.log(event.value);
+    if (event.value == 1) {
+      this.isOneWay = true;
+    } else if (event.value == 2) {
+      this.isOneWay = false;
+    }
+  }
 
 }

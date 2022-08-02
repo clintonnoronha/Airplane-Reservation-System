@@ -47,7 +47,7 @@
         </mat-form-field>
 
         <mat-form-field>
-            <input formControlName="departureDate" matInput [matDatepicker]="picker" placeholder="Departure Date">
+            <input [min]="minDate" formControlName="departureDate" matInput [matDatepicker]="picker" placeholder="Departure Date">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
             <mat-error *ngIf="hasError('departureDate', 'required')">This field is mandatory.</mat-error>

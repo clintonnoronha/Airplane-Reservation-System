@@ -24,6 +24,8 @@ export class SeatSelectionComponent implements OnInit {
 
   bookedSeats = [];
 
+  booked = [];
+
   selectSeats = [];
 
   isLoaded = false;
@@ -40,6 +42,7 @@ export class SeatSelectionComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.fetchSeatsBooked();
     this.myForm = this.fb.group({
       A1: { value: false, disabled: false },
       B1: { value: false, disabled: false },
@@ -78,10 +81,9 @@ export class SeatSelectionComponent implements OnInit {
       E6: { value: false, disabled: false },
       F6: { value: false, disabled: false },
     });
-    this.fetchSeatsBooked();
     let it = this;
     setTimeout(function () {
-      console.log(it.bookedSeats, 'test');
+      console.log(it.booked, 'test');
       Object.keys(it.myForm.controls).forEach((key) => {
         console.log(key);
         if (it.bookedSeats.includes(key)) {
@@ -103,37 +105,21 @@ export class SeatSelectionComponent implements OnInit {
     };
 
     if (this.localStore.getData('classType') === 'Economy') {
-      this.seatsBookedService.fetchBusinessBooked().subscribe((response) => {
+      
+      this.seatsBookedService.fetchBusinessBooked(toFetchBookedSeats).subscribe((response) => {
         this.bookedSeats = response;
         console.log(this.bookedSeats + ' ' + response);
       });
 
-      this.seatsBookedService
-        .fetchSeatsBooked(toFetchBookedSeats)
-        .subscribe((response) => {
-          response.forEach((e) => {
-            if (!this.bookedSeats.includes(e)) {
-              this.bookedSeats.push(e);
-            }
-          });
-          console.log(this.bookedSeats + ' ' + response);
-        });
+      console.log(this.booked);
+
     } else if (this.localStore.getData('classType') === 'Business') {
-      this.seatsBookedService.fetchEconomySeats().subscribe((response) => {
+
+      this.seatsBookedService.fetchEconomySeats(toFetchBookedSeats).subscribe((response) => {
         this.bookedSeats = response;
         console.log(this.bookedSeats + ' ' + response);
       });
 
-      this.seatsBookedService
-        .fetchSeatsBooked(toFetchBookedSeats)
-        .subscribe((response) => {
-          response.forEach((e) => {
-            if (!this.bookedSeats.includes(e)) {
-              this.bookedSeats.push(e);
-            }
-          });
-          console.log(this.bookedSeats + ' ' + response);
-        });
     }
   }
 

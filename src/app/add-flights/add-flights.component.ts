@@ -9,6 +9,8 @@ import { AddFlightService } from '../shared/add-flight.service';
 })
 export class AddFlightsComponent implements OnInit {
 
+  minDate = new Date();
+
   cities = [
     {city: 'Ahmedabad'},
     {city: 'Bangalore'},

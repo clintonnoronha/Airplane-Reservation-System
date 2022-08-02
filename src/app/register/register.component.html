@@ -14,12 +14,14 @@
             <mat-label>First Name</mat-label>
             <input type="text" matInput formControlName="firstName" placeholder="First Name*">
             <mat-error *ngIf="hasError('firstName', 'required')">This field is mandatory.</mat-error>
+            <mat-error *ngIf="hasError('firstName', 'noSpaceAllowed')">No Spaces Allowed.</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Last Name</mat-label>
-            <input type="text" matInput formControlName="lastName" placeholder="First Name*">
+            <input type="text" matInput formControlName="lastName" placeholder="Last Name*">
             <mat-error *ngIf="hasError('lastName', 'required')">This field is mandatory.</mat-error>
+            <mat-error *ngIf="hasError('lastName', 'noSpaceAllowed')">No Spaces Allowed.</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -27,6 +29,7 @@
             <input type="email" matInput formControlName="email" placeholder="Email*">
             <mat-error *ngIf="hasError('email', 'required')">This field is mandatory.</mat-error>
             <mat-error *ngIf="hasError('email', 'email')">Invalid Email Address.</mat-error>
+            <mat-error *ngIf="hasError('email', 'noSpaceAllowed')">No Spaces Allowed.</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -34,6 +37,7 @@
             <input type="password" matInput formControlName="password" placeholder="Password*">
             <mat-error *ngIf="hasError('password', 'required')">This field is mandatory.</mat-error>
             <mat-error *ngIf="hasError('password', 'minlength')">Minimum 8 characters needed.</mat-error>
+            <mat-error *ngIf="hasError('password', 'maxlength')">Maximum 16 characters allowed.</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">
@@ -41,6 +45,7 @@
             <input type="number" matInput formControlName="phoneNumber" placeholder="Mobile Number*">
             <mat-error *ngIf="hasError('phoneNumber', 'required')">This field is mandatory.</mat-error>
             <mat-error *ngIf="hasError('phoneNumber', 'pattern')">Invalid Mobile Number.</mat-error>
+            <mat-error *ngIf="hasError('phoneNumber', 'noSpaceAllowed')">No Spaces Allowed.</mat-error>
         </mat-form-field>
 
         <mat-form-field>

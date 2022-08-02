@@ -4,8 +4,8 @@
         
         <div class="add-bottom-padding"> 
             <mat-radio-group formControlName="journeyType"> 
-                <mat-radio-button value="1">One-Way</mat-radio-button>
-                <mat-radio-button value="2">Return</mat-radio-button> 
+                <mat-radio-button value="1" (change)="disableReturn($event)">One-Way</mat-radio-button>
+                <mat-radio-button value="2" (change)="disableReturn($event)">Return</mat-radio-button> 
                 <mat-error *ngIf="hasError('journeyType', 'required')">This field is mandatory.</mat-error>
             </mat-radio-group>
         </div>
@@ -36,10 +36,9 @@
         </mat-form-field>
 
         <mat-form-field >
-            <input formControlName="returnDate" matInput [matDatepicker]="returnPicker" placeholder="Return Date">
+            <input formControlName="returnDate" matInput [matDatepicker]="returnPicker" [disabled]="isOneWay" placeholder="Return Date">
             <mat-datepicker-toggle matSuffix [for]="returnPicker"></mat-datepicker-toggle>
             <mat-datepicker #returnPicker></mat-datepicker>
-            <mat-error *ngIf="hasError('returnDate', 'required')">This field is mandatory.</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill">

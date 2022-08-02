@@ -12,12 +12,12 @@ export class RegisterComponent implements OnInit {
 
   maxDate=new Date();
   form = new FormGroup({
-    firstName: new FormControl('', Validators.required),
-    lastName: new FormControl('', Validators.required),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    firstName: new FormControl('', [Validators.required, this.noSpaceAllowed]),
+    lastName: new FormControl('', [Validators.required, this.noSpaceAllowed]),
+    email: new FormControl('', [Validators.required, this.noSpaceAllowed, Validators.email, this.noSpaceAllowed]),
+    password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(16)]),
     dob: new FormControl('', Validators.required),
-    phoneNumber: new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]),
+    phoneNumber: new FormControl('', [Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$"), this.noSpaceAllowed]),
     title: new FormControl(1, Validators.required)
   });
 
@@ -29,10 +29,16 @@ export class RegisterComponent implements OnInit {
 
   message: string='';
   registered=false;
-  constructor(private service: RegisterService,
-    private registerDialogue: MatDialogRef<RegisterComponent>) { }
+  constructor(private service: RegisterService) { }
 
   ngOnInit(): void {
+  }
+
+  noSpaceAllowed(control: FormControl) {
+    if (control.value != null && control.value.indexOf(' ') != -1) {
+      return { noSpaceAllowed: true };
+    }
+    return null;
   }
 
   onRegister(){

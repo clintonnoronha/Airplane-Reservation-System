@@ -13,4 +13,8 @@ export class LoginService {
   login(data: any) : Observable<any>{
       return this.http.get(`${this.url +'?email='+ data.email + '&password='+ data.password}`,data);
   }
+
+  check(data: any) : Observable<any>{
+    return this.http.get(`${this.url + '/' + data.email}`,data);
+}
 }

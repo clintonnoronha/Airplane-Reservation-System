@@ -62,6 +62,10 @@ export class AddPassengerComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.form.value.age <= 0) {
+      alert('Invalid Age');
+      return;
+    }
     let seat = this.passengers[this.count];
     let toAdd = {
       trip_id: this.localStore.getData('selected_trip_id'),
@@ -79,6 +83,7 @@ export class AddPassengerComponent implements OnInit {
 
   async onDone() {
     let count = this.passengers.length;
+    let cnt = this.count;
 
     let seat_cost = parseInt(this.localStore.getData('price'));
 
@@ -93,29 +98,35 @@ export class AddPassengerComponent implements OnInit {
 
     let it = this;
 
-    const handler = await (<any>window).StripeCheckout.configure({
-      key: 'pk_test_51LNWFMSCO5sv8kG0ynaLvIK0fO5d1uPAOM51O05QKD4jIJJhaBP3LSqmAtXAsxehEMEGvEFJ5lEykh9AI4Bpzu8f000NYg4X7x',
-      image:
-        'https://st2.depositphotos.com/4845131/7223/v/600/depositphotos_72231891-stock-illustration-icon-plane-2.jpg',
-      locale: 'auto',
-      token: function (stripeToken: any) {
-        // Successful Payment
+    if (count == cnt) {
+      const handler = await (<any>window).StripeCheckout.configure({
+        key: 'pk_test_51LNWFMSCO5sv8kG0ynaLvIK0fO5d1uPAOM51O05QKD4jIJJhaBP3LSqmAtXAsxehEMEGvEFJ5lEykh9AI4Bpzu8f000NYg4X7x',
+        image:
+          'https://st2.depositphotos.com/4845131/7223/v/600/depositphotos_72231891-stock-illustration-icon-plane-2.jpg',
+        locale: 'auto',
+        token: function (stripeToken: any) {
+          // Successful Payment
+  
+          toCreate.paymentId = stripeToken.card.id;
+          console.log(toCreate);
+          if (toCreate.paymentId !== '') {
+            it.payService.create(toCreate).subscribe((response) => {
+              console.log("payment check");
+              alert('Payment Successful!');
+              it.router.navigateByUrl('/search');
+            });
+          }
+        },
+      });
+  
+      handler.open({
+        name: 'Mini AirBus',
+        description: '' + count + ' Seat(s) Booked',
+        amount: count * (seat_cost * 100),
+        currency: 'inr',
+      });
+    }
 
-        toCreate.paymentId = stripeToken.card.id;
-        console.log(toCreate);
-        it.payService.create(toCreate).subscribe((response) => {
-          alert('Payment Successful!');
-          it.router.navigateByUrl('/search');
-        });
-      },
-    });
-
-    handler.open({
-      name: 'Mini AirBus',
-      description: '' + count + ' Seat(s) Booked',
-      amount: count * (seat_cost * 100),
-      currency: 'inr',
-    });
     this.dialog.close();
   }
 

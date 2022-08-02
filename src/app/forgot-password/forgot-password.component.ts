@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl,Validators, FormGroup } from '@angular/forms';
+import { FormControl,Validators, FormGroup, AbstractControl } from '@angular/forms';
+import { LoginService } from '../shared/login.service';
 import { ForgotPasswordService } from '../shared/forgot-password.service';
-
-// import {​​​​​​ ConfirmedValidator }​​​​​​ from './confirmed.validator';
 
 @Component({
   selector: 'app-forgot-password',
@@ -12,14 +11,15 @@ import { ForgotPasswordService } from '../shared/forgot-password.service';
 export class ForgotPasswordComponent implements OnInit {
 
   form = new FormGroup({
-    emailId: new FormControl('', [Validators.required, Validators.email]),
+    emailId: new FormControl('', [Validators.required, Validators.email, this.noSpaceAllowed]),
     password: new FormControl('', [Validators.required, Validators.minLength(8)]),
-    confirmPassword:new FormControl('', [Validators.required, Validators.minLength(8)])
+    confirmPassword: new FormControl('', [Validators.required, Validators.minLength(8)])
   }
     
   );
 
-  constructor(private forgotPasswordService: ForgotPasswordService) { }
+  constructor(private forgotPasswordService: ForgotPasswordService,
+    private loginService: LoginService) {  }
  
   ngOnInit(): void {
   }
@@ -31,8 +31,16 @@ export class ForgotPasswordComponent implements OnInit {
     }
 
     this.forgotPasswordService.forgotPassword(toForgotPassword).subscribe(response=> {
+      alert('Your password was reset! Kindly log in.')
       window.location.reload();
     });
+  }
+
+  noSpaceAllowed(control: FormControl) {
+    if (control.value != null && control.value.indexOf(' ') != -1) {
+      return { noSpaceAllowed: true };
+    }
+    return null;
   }
 
   public hasError = (controlName: string, errorName: string) => {
@@ -45,7 +53,20 @@ export class ForgotPasswordComponent implements OnInit {
           alert('Password Mismatch!!');
           return;
       }
-      this.forgotPassword();
+
+      let toCheck = {
+        email: this.form.value.emailId
+      }
+
+      this.loginService.check(toCheck).subscribe(res => {
+        if (res.length != 0) {
+          this.forgotPassword();
+        } else {
+          alert('User with Email ID: ' + this.form.value.emailId + " was not found!");
+          return;
+        }
+      });
+      
   }
 
 
