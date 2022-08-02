@@ -11,6 +11,12 @@ export class SearchFlightService {
   
   url:string ="http://localhost:9090/search";
 
+  urlFlight:string ="http://localhost:9090/flights";
+
+  searchFlights(): Observable<any> {
+    return this.http.get(`${this.urlFlight}`);
+  }
+
   searchFlightOneWay(data: any): Observable<any> {
     return this.http.get(`${this.url + '?departure_date=' + data.departure_date + 
     '&source=' + data.source + '&destination=' + data.destination + 

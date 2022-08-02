@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DeleteFlightService } from '../shared/delete-flight.service';
+import { SearchFlightService } from '../shared/search-flight.service';
 
 @Component({
   selector: 'app-delete-flights',
@@ -9,32 +9,32 @@ import { DeleteFlightService } from '../shared/delete-flight.service';
 })
 export class DeleteFlightsComponent implements OnInit {
 
-  form= new FormGroup({
-    flightId: new FormControl('', Validators.required)
-  });
+  allFlights = [];
 
-  constructor(private deleteFlightService: DeleteFlightService) { }
+  constructor(private searchFlightService: SearchFlightService,
+    private deleteFlightService: DeleteFlightService
+    ) { }
 
   ngOnInit(): void {
+    this.onLoad();
   }
 
-  onDeleteFlight(){
+  onLoad() {
+   this.searchFlightService.searchFlights().subscribe(response=>{
+    this.allFlights=response;
+   });
+  }
+
+  deleteFlight(id: any){
     let toDeleteFlight= {
-      flightId: this.form.value.flightId
+      flightId: id
     }
     
     this.deleteFlightService.deleteFlight(toDeleteFlight).subscribe(response => {
-        this.form.reset();
         alert("Flight with ID: " + response + " is deleted!");
+        window.location.reload();
     });
-    
   }
+  
 
-  onSubmit() {
-    this.onDeleteFlight();
-  }  
-
-  public hasError = (controlName: string, errorName: string) => {
-    return this.form.controls[controlName].hasError(errorName);
-  }
 }
