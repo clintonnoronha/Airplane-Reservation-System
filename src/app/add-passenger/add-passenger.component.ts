@@ -100,7 +100,7 @@ export class AddPassengerComponent implements OnInit {
 
     if (count == cnt) {
       const handler = await (<any>window).StripeCheckout.configure({
-        key: 'pk_test_51LNWFMSCO5sv8kG0ynaLvIK0fO5d1uPAOM51O05QKD4jIJJhaBP3LSqmAtXAsxehEMEGvEFJ5lEykh9AI4Bpzu8f000NYg4X7x',
+        key: '<Enter your Strip public key>',
         image:
           'https://st2.depositphotos.com/4845131/7223/v/600/depositphotos_72231891-stock-illustration-icon-plane-2.jpg',
         locale: 'auto',
